@@ -5,7 +5,10 @@ uniform sampler2D texture1;
 float PI = 3.141592653589793238;
 void main() {
   vUv = uv;
-  vec4 mvPosition = modelViewMatrix * vec4( position, 1. );
-  gl_PointSize = 1000. * ( 1. / - mvPosition.z );
+  vec3 newPos = position;
+  newPos.z += sin(20.*2.*PI*newPos.y+time);
+  newPos.y += sin(200.*2.*PI*newPos.x+time);
+  vec4 mvPosition = modelViewMatrix * vec4( newPos, 1. );
+  gl_PointSize = 100. * ( 1. / - mvPosition.z );
   gl_Position = projectionMatrix * mvPosition;
 }
